@@ -1,5 +1,5 @@
 import MakeTodo from './logic/todos.js'
 import MakeList from './logic/lists.js'
-import TodoApp from './logic/todo-app.js'
-import addList from './dom/addList.js'
+import state from './logic/state.js'
+import './dom/events.js'
 import './styles/style.css'
