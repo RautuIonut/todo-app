@@ -4,6 +4,7 @@ class MakeTodo {
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
+    this.checked = false
     this.id = crypto.randomUUID()
   }
 
@@ -12,6 +13,10 @@ class MakeTodo {
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
+  }
+
+  check() {
+    this.checked = this.checked === false ? true : false
   }
 }
 
