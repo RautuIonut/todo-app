@@ -15,24 +15,31 @@ function showList(name) {
     const checkbox = document.createElement('input')
     const header = document.createElement('div')
     const remove = document.createElement('button')
+    const edit = document.createElement('button')
 
+    todo.classList.add('todo')
     title.classList.add('title')
-    checkbox.type = 'checkbox'
+    description.classList.add('description')
+    priority.classList.add('priority')
+    date.classList.add('date')
     checkbox.classList.add('checkbox')
-    header.append(title, description) 
     remove.classList.add('remove')
-    remove.textContent = 'remove'
+    edit.classList.add('edit')
+    todo.id = list.todos[i].id
+    
+
+    checkbox.type = 'checkbox'
 
     title.textContent = list.todos[i].title
     description.textContent = list.todos[i].description
     date.textContent = list.todos[i].dueDate
     priority.textContent = list.todos[i].priority
-    todo.id = list.todos[i].id
+    remove.textContent = 'remove'
+    edit.textContent = 'edit'
+    
 
-    document.createElement('div').append()
-
-    todo.classList.add('todo')
-    todo.append(checkbox, header, date, priority, remove)
+    header.append(title, description)
+    todo.append(checkbox, header, date, priority, remove, edit)
     content.appendChild(todo)
   }
 }

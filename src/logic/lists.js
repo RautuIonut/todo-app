@@ -16,6 +16,15 @@ class MakeList {
   deleteTodo(id) {
     this.todos = this.todos.filter(todo => todo.id !== id)
   }
+
+  editTodo(id, title, description, dueDate, priority) {
+    const todo = this.todos.find(todo => todo.id === id)
+
+    todo.title = title
+    todo.description = description
+    todo.dueDate = dueDate
+    todo.priority = priority
+  }
 }
 
 export default MakeList

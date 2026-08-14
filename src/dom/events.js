@@ -35,6 +35,34 @@ document.body.addEventListener('click', (e) => {
     list.deleteTodo(id)
     showList(list.name)
   }
+  
+  if (e.target.classList.contains('edit')) {
+    elements.form.classList.remove('hidden')
+    elements.form.id = e.target.closest('.todo').id
+
+    elements.titleInput.value = e.target.closest('.todo')
+      .querySelector('.title'). textContent
+    elements.descriptionInput.value = e.target.closest('.todo')
+      .querySelector('.description').textContent
+    elements.dateInput.value = e.target.closest('.todo')
+      .querySelector('.date').value
+  }
+
+  if (e.target.classList.contains('save-btn')) {
+    e.preventDefault()
+    elements.form.classList.add('hidden')
+
+    const list = state.getList(elements.form.id)
+    list.editTodo(
+      elements.form.id,
+      elements.titleInput.value,
+      elements.descriptionInput.value,
+      elements.dateInput.value,
+      elements.priorityInput.value
+    )
+
+    showList(list.name)
+  }
 })
 
 window.addEventListener('load', (e) => {
