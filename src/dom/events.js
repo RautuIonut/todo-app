@@ -27,6 +27,14 @@ document.body.addEventListener('click', (e) => {
 
     showList(e.target.textContent)
   }
+
+  if (e.target.classList.contains('remove')) {
+    const id = e.target.closest('.todo').id
+    const list = state.getList(id)
+
+    list.deleteTodo(id)
+    showList(list.name)
+  }
 })
 
 window.addEventListener('load', (e) => {

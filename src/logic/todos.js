@@ -13,6 +13,7 @@ class MakeTodo {
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
+    this.id = crypto.randomUUID()
   }
 
   check() {
