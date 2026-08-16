@@ -1,10 +1,13 @@
 import state from '../logic/state.js'
+import elements from './elements.js'
 
 function showList(name) {
   const list = state.lists.find(list => list.name === name)
-  const content = document.querySelector('.content')
+
+  elements.title.textContent = list.name
+
   
-  content.innerHTML = ''
+  elements.content.innerHTML = ''
   
   for (let i = 0; i < list.todos.length; i++) {
     const todo = document.createElement('div')
@@ -35,12 +38,11 @@ function showList(name) {
     date.textContent = list.todos[i].dueDate
     priority.textContent = list.todos[i].priority
     remove.textContent = 'remove'
-    edit.textContent = 'edit'
-    
+    edit.textContent = 'edit'    
 
     header.append(title, description)
     todo.append(checkbox, header, date, priority, remove, edit)
-    content.appendChild(todo)
+    elements.content.appendChild(todo)
   }
 }
 
