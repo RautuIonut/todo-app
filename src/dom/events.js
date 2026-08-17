@@ -121,6 +121,13 @@ document.body.addEventListener('click', (e) => {
       showList(state.getList(todo.id).name)
     }
   }
+
+  if (e.target.classList.contains('cancel-btn')) {
+    e.preventDefault()
+    elements.form.classList.add('hidden')
+    elements.saveButton.classList = ''
+    resetInputs()
+  }
 })
 
 window.addEventListener('load', (e) => {

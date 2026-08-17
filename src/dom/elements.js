@@ -10,7 +10,8 @@ const elements = {
   priorityInput: document.querySelector('#priority'),
   title: document.querySelector('.header .title'),
   counter: document.querySelector('.counter'),
-  addTodoButton: document.querySelector('.add-todo-btn')
+  addTodoButton: document.querySelector('.add-todo-btn'),
+  cancelButton: document.querySelector('.cancel-btn'),
 }
 
 export default elements
