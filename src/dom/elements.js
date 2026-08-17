@@ -8,7 +8,8 @@ const elements = {
   descriptionInput: document.querySelector('#description'),
   dateInput: document.querySelector('#date'),
   priorityInput: document.querySelector('#priority'),
-  title: document.querySelector('.header > .title'),
+  title: document.querySelector('.header .title'),
+  counter: document.querySelector('.counter'),
   addTodoButton: document.querySelector('.add-todo-btn')
 }
 

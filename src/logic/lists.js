@@ -15,6 +15,7 @@ class MakeList {
 
   deleteTodo(id) {
     this.todos = this.todos.filter(todo => todo.id !== id)
+    this.count--
   }
 
   editTodo(id, title, description, dueDate, priority) {

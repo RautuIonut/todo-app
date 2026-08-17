@@ -5,6 +5,7 @@ function showList(name) {
   const list = state.lists.find(list => list.name === name)
 
   elements.title.textContent = list.name
+  elements.counter.textContent = `(${list.count})`
 
   
   elements.content.innerHTML = ''
