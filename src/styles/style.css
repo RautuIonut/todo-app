@@ -6,3 +6,8 @@ body {
 form.hidden {
   display: none;
 }
+
+.checked p {
+  color: gray;
+  text-decoration: line-through;
+}

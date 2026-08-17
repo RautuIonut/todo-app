@@ -25,6 +25,12 @@ class MakeList {
     todo.dueDate = dueDate
     todo.priority = priority
   }
+
+  checkTodo(id) {
+    const todo = this.todos.find(todo => todo.id === id)
+
+    todo.checked = todo.checked === false ? true : false
+  }
 }
 
 export default MakeList

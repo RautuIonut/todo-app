@@ -33,6 +33,11 @@ function showList(name) {
 
     checkbox.type = 'checkbox'
 
+    if (list.todos[i].checked) {
+      todo.classList.add('checked')
+      checkbox.setAttribute('checked', 'checked')
+    }
+
     title.textContent = list.todos[i].title
     description.textContent = list.todos[i].description
     date.textContent = list.todos[i].dueDate

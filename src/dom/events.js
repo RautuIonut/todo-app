@@ -54,7 +54,7 @@ document.body.addEventListener('click', (e) => {
     elements.descriptionInput.value = e.target.closest('.todo')
       .querySelector('.description').textContent
     elements.priorityInput.value = e.target.closest('.todo')
-      .querySelector('.description').textContent
+      .querySelector('.priority').textContent
     elements.dateInput.value = e.target.closest('.todo')
       .querySelector('.date').value
   }
@@ -102,6 +102,24 @@ document.body.addEventListener('click', (e) => {
 
     showList(list.name)
     resetInputs()
+  }
+
+  if (e.target.classList.contains('checkbox')) {
+    if (e.target.hasAttribute('checked')) {
+      e.target.toggleAttribute('checked')
+
+      const todo = e.target.closest('.todo')
+      todo.classList.remove('checked')
+      state.getList(todo.id).checkTodo(todo.id)
+    } else {
+      e.target.toggleAttribute('checked')
+
+      const todo = e.target.closest('.todo')
+      todo.classList.add('checked')
+      state.getList(todo.id).checkTodo(todo.id)
+
+      showList(state.getList(todo.id).name)
+    }
   }
 })
 

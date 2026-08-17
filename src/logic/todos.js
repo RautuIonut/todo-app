@@ -7,10 +7,6 @@ class MakeTodo {
     this.checked = false
     this.id = crypto.randomUUID()
   }
-
-  check() {
-    this.checked = this.checked === false ? true : false
-  }
 }
 
 export default MakeTodo
