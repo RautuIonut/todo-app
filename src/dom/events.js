@@ -1,7 +1,7 @@
 import state from '../logic/state.js'
 import elements from './elements.js'
 import showList from './showList.js'
-import MakeList from '../logic/lists.js'
+import {loadState} from '../logic/storage.js'
 
 function displayLists() {
   elements.listsContainer.innerHTML = ''
@@ -57,7 +57,7 @@ document.body.addEventListener('click', (e) => {
     elements.priorityInput.value = e.target.closest('.todo')
       .querySelector('.priority').textContent
     elements.dateInput.value = e.target.closest('.todo')
-      .querySelector('.date').value
+      .querySelector('.date').textContent
   }
 
   if (e.target.classList.contains('save-edit-btn')) {
@@ -149,9 +149,12 @@ document.body.addEventListener('click', (e) => {
 })
 
 window.addEventListener('load', (e) => {
-  state.addList('default')
-  elements.addInput.value = ''
+  loadState()
+
+  if (state.lists.length === 0) {
+    state.addList('default')
+    document.querySelector('.list').classList.add('open')
+  }
   displayLists()
-  document.querySelector('.list').classList.add('open')
   showList('default')
 })
