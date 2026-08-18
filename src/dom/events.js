@@ -3,16 +3,15 @@ import elements from './elements.js'
 import showList from './showList.js'
 import MakeList from '../logic/lists.js'
 
-function createList(name) {
-  state.addList(name)
+function displayLists() {
+  elements.listsContainer.innerHTML = ''
 
-  const container = document.createElement('div')
-  
-  container.textContent = name
-  container.classList.add('list')
-  document.querySelector('.sidebar').appendChild(container)
-
-  elements.addInput.value = ''
+  for (let i = 0; i < state.lists.length; i++) {
+    const container = document.createElement('div')
+    container.textContent = state.lists[i].name
+    container.classList.add('list')
+    elements.listsContainer.appendChild(container)
+  }  
 }
 
 function resetInputs() {
@@ -25,7 +24,9 @@ function resetInputs() {
 
 document.body.addEventListener('click', (e) => {
   if (e.target.classList.contains('add-btn')) {
-    createList(elements.addInput.value)
+    state.addList(elements.addInput.value)
+    elements.addInput.value = ''
+    displayLists()
   }
 
   if (e.target.classList.contains('list') && !e.target.classList.contains('open')) {
@@ -128,10 +129,29 @@ document.body.addEventListener('click', (e) => {
     elements.saveButton.classList = ''
     resetInputs()
   }
+
+  if (e.target.classList.contains('delete-list-btn') && document.querySelector('.open')) {
+    if (document.querySelectorAll('.list').length === 1) {
+      const error = document.createElement('p')
+      error.textContent = 'You cannot remove the last project'
+      elements.content.appendChild(error)
+      return
+    }
+
+    const target = document.querySelector('.open')
+    target.classList.remove('open')
+    state.deleteList(target.textContent)
+    displayLists()
+    document.querySelector('.list').classList.add('open')
+    showList(document.querySelector('.list').textContent)
+    console.log(state)
+  }
 })
 
 window.addEventListener('load', (e) => {
-  createList('default')
+  state.addList('default')
+  elements.addInput.value = ''
+  displayLists()
   document.querySelector('.list').classList.add('open')
   showList('default')
 })
