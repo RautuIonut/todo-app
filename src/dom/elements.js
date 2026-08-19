@@ -8,10 +8,6 @@ const elements = {
   descriptionInput: document.querySelector('#description'),
   dateInput: document.querySelector('#date'),
   priorityInput: document.querySelector('#priority'),
-  header: document.querySelector('.header'),
-  title: document.querySelector('.header .title'),
-  counter: document.querySelector('.counter'),
-  addTodoButton: document.querySelector('.add-todo-btn'),
   cancelButton: document.querySelector('.cancel-btn'),
   listsContainer: document.querySelector('.lists')
 }

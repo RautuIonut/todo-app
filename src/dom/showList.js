@@ -2,13 +2,31 @@ import state from '../logic/state.js'
 import elements from './elements.js'
 
 function showList(name) {
-  const list = state.lists.find(list => list.name === name)
+  elements.content.innerHTML = ''
 
-  elements.title.textContent = list.name
-  elements.counter.textContent = `(${list.count})`
+  const list = state.lists.find(list => list.name === name)
+  const header = document.createElement('div')
+  const title = document.createElement('h2')
+  const counter = document.createElement('p')
+  const addBtn = document.createElement('button')
+  const removeBtn = document.createElement('button')
+
+  header.classList.add('header')
+  title.classList.add('title')
+  counter.classList.add('counter')
+  addBtn.classList.add('add-todo-btn')
+  removeBtn.classList.add('delete-list-btn')
+
+  title.textContent = list.name
+  counter.textContent = `(${list.count})`
+  addBtn.textContent = 'Add'
+  removeBtn.textContent = 'Remove'
+
+  header.append(title, counter, addBtn, removeBtn)
+  elements.content.appendChild(header)
 
   
-  elements.content.innerHTML = ''
+  
   
   for (let i = 0; i < list.todos.length; i++) {
     const todo = document.createElement('div')
@@ -17,7 +35,7 @@ function showList(name) {
     const date = document.createElement('p')
     const priority = document.createElement('p')
     const checkbox = document.createElement('input')
-    const header = document.createElement('div')
+    const titleDescription = document.createElement('div')
     const remove = document.createElement('button')
     const edit = document.createElement('button')
 
@@ -46,8 +64,8 @@ function showList(name) {
     remove.textContent = 'remove'
     edit.textContent = 'edit'    
 
-    header.append(title, description)
-    todo.append(checkbox, header, date, priority, remove, edit)
+    titleDescription.append(title, description)
+    todo.append(checkbox, titleDescription, date, priority, remove, edit)
     elements.content.appendChild(todo)
   }
 }

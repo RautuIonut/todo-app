@@ -3,6 +3,5 @@ import MakeList from './logic/lists.js'
 import state from './logic/state.js'
 import showList from './dom/showList.js'
 import './dom/events.js'
+import './styles/reset.css'
 import './styles/style.css'
-
-console.log(localStorage)

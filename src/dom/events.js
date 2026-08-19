@@ -154,7 +154,7 @@ window.addEventListener('load', (e) => {
   if (state.lists.length === 0) {
     state.addList('default')
     document.querySelector('.list').classList.add('open')
+    showList('default')
   }
   displayLists()
-  showList('default')
 })
