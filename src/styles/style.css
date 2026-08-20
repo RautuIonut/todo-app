@@ -16,8 +16,23 @@
   --padding: 0.5rem;
 }
 
+@font-face {
+  font-family: 'Aller';
+  src: url('./../fonts/Aller_Rg.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Aller';
+  src: url('./../fonts/Aller_Bd.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
 body {
   background-color: var(--slate-900);
+  font-family: 'Aller', sans-serif;
 }
 
 .wrapper {
@@ -32,6 +47,8 @@ body {
 .logo {
   color: var(--indigo-400);
   font-size: 2.5rem;
+  font-family: 'Aller', sans-serif;
+  font-weight: 800;
 }
 
 .add {
