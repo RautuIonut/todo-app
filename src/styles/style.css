@@ -201,7 +201,7 @@ form textarea:focus {
 }
 
 .priority {
-  max-width: 4rem;
+  max-width: 4.5rem;
   text-align: center;
   border-radius: 15px;
   color: var(--slate-100);
