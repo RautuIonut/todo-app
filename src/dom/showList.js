@@ -10,24 +10,25 @@ function showList(name) {
   const counter = document.createElement('p')
   const addBtn = document.createElement('button')
   const removeBtn = document.createElement('button')
+  const todoContainer = document.createElement('div')
+  const error = document.createElement('p')
 
   header.classList.add('header')
   title.classList.add('title')
   counter.classList.add('counter')
   addBtn.classList.add('add-todo-btn')
   removeBtn.classList.add('delete-list-btn')
+  error.classList.add('error')
+  todoContainer.classList.add('todo-container')
 
   title.textContent = list.name
   counter.textContent = `(${list.count})`
   addBtn.textContent = 'Add'
   removeBtn.textContent = 'Remove'
 
-  header.append(title, counter, addBtn, removeBtn)
-  elements.content.appendChild(header)
+  header.append(title, counter, addBtn, removeBtn, error)
+  elements.content.append(header, todoContainer)
 
-  
-  
-  
   for (let i = 0; i < list.todos.length; i++) {
     const todo = document.createElement('div')
     const title = document.createElement('p')
@@ -39,34 +40,42 @@ function showList(name) {
     const remove = document.createElement('button')
     const edit = document.createElement('button')
 
+    if (list.todos[i].checked) {
+      todo.classList.add('checked')
+    }
+
     todo.classList.add('todo')
     title.classList.add('title')
     description.classList.add('description')
     priority.classList.add('priority')
     date.classList.add('date')
-    checkbox.classList.add('checkbox')
     remove.classList.add('remove')
     edit.classList.add('edit')
     todo.id = list.todos[i].id
     
-
-    checkbox.type = 'checkbox'
-
-    if (list.todos[i].checked) {
-      todo.classList.add('checked')
-      checkbox.setAttribute('checked', 'checked')
-    }
-
     title.textContent = list.todos[i].title
     description.textContent = list.todos[i].description
-    date.textContent = list.todos[i].dueDate
+    date.textContent = `Due date: ${list.todos[i].dueDate}`
     priority.textContent = list.todos[i].priority
-    remove.textContent = 'remove'
-    edit.textContent = 'edit'    
+    remove.textContent = 'Remove'
+    edit.textContent = 'Edit'
+
+    switch (priority.textContent) {
+      case 'low':
+        priority.classList.add('low')
+        break
+      
+      case 'medium':
+        priority.classList.add('medium')
+        break
+
+      case 'high':
+        priority.classList.add('high')
+    }
 
     titleDescription.append(title, description)
-    todo.append(checkbox, titleDescription, date, priority, remove, edit)
-    elements.content.appendChild(todo)
+    todo.append(titleDescription, date, priority, remove, edit)
+    todoContainer.append(todo)
   }
 }
 

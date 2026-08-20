@@ -12,6 +12,9 @@ function displayLists() {
     container.classList.add('list')
     elements.listsContainer.appendChild(container)
   }  
+
+  elements.listsContainer.firstElementChild.classList.add('open')
+  showList(document.querySelector('.list').textContent)
 }
 
 function resetInputs() {
@@ -23,7 +26,9 @@ function resetInputs() {
 }
 
 document.body.addEventListener('click', (e) => {
-  if (e.target.classList.contains('add-btn')) {
+  document.querySelector('.error').textContent = ''
+  
+  if (e.target.classList.contains('add-btn') && elements.addInput.value) {
     state.addList(elements.addInput.value)
     elements.addInput.value = ''
     displayLists()
@@ -47,6 +52,7 @@ document.body.addEventListener('click', (e) => {
   
   if (e.target.classList.contains('edit')) {
     elements.form.classList.remove('hidden')
+    elements.wrapper.classList.toggle('blur')
     elements.saveButton.classList.add('save-edit-btn')
     elements.form.id = e.target.closest('.todo').id
 
@@ -60,34 +66,61 @@ document.body.addEventListener('click', (e) => {
       .querySelector('.date').textContent
   }
 
-  if (e.target.classList.contains('save-edit-btn')) {
-    e.preventDefault()
-    elements.form.classList.add('hidden')
-
-    const list = state.getList(elements.form.id)
-    list.editTodo(
-      elements.form.id,
-      elements.titleInput.value,
-      elements.descriptionInput.value,
-      elements.dateInput.value,
-      elements.priorityInput.value
-    )
-
-    elements.saveButton.classList.remove('save-edit-btn')
-    elements.form.id = ''
-
-    showList(list.name)
-    resetInputs()
-  }
-
   if (e.target.classList.contains('add-todo-btn')) {
     elements.form.classList.remove('hidden')
+    elements.wrapper.classList.toggle('blur')
     elements.saveButton.classList.add('save-todo-btn')
   }
 
-  if (e.target.classList.contains('save-todo-btn')) {
+  if (e.target.classList.contains('todo')) {
+    e.target.classList.toggle('checked')
+
+    state.getList(e.target.id).checkTodo(e.target.id)
+  }
+
+  if (e.target.classList.contains('cancel-btn')) {
     e.preventDefault()
-    elements.form.classList.add('hidden') 
+    elements.form.classList.add('hidden')
+    elements.wrapper.classList.toggle('blur')
+    elements.saveButton.classList = ''
+    resetInputs()
+  }
+
+  if (e.target.classList.contains('delete-list-btn') && document.querySelector('.open')) {
+    if (document.querySelectorAll('.list').length === 1) {
+      document.querySelector('.error').textContent = 'You cannot remove the last list'
+      return
+    }
+
+    const target = document.querySelector('.open')
+
+    target.remove()
+    state.deleteList(target.textContent)
+    displayLists()
+    document.querySelector('.list').classList.add('open')
+    showList(document.querySelector('.list').textContent)
+  }
+})
+
+window.addEventListener('load', (e) => {
+  loadState()
+
+  if (state.lists.length === 0) {
+    state.addList('default')
+    document.querySelector('.list').classList.add('open')
+    showList('default')
+  }
+
+  displayLists()
+  showList(document.querySelector('.list').textContent)
+})
+
+elements.form.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  if (elements.saveButton.classList.contains('save-todo-btn')) {
+    elements.form.classList.add('hidden')
+    elements.wrapper.classList.toggle('blur')
 
     const list = state.lists
       .find(list => list.name === document.querySelector('.open').textContent)
@@ -105,56 +138,22 @@ document.body.addEventListener('click', (e) => {
     resetInputs()
   }
 
-  if (e.target.classList.contains('checkbox')) {
-    if (e.target.hasAttribute('checked')) {
-      e.target.toggleAttribute('checked')
-
-      const todo = e.target.closest('.todo')
-      todo.classList.remove('checked')
-      state.getList(todo.id).checkTodo(todo.id)
-    } else {
-      e.target.toggleAttribute('checked')
-
-      const todo = e.target.closest('.todo')
-      todo.classList.add('checked')
-      state.getList(todo.id).checkTodo(todo.id)
-
-      showList(state.getList(todo.id).name)
-    }
-  }
-
-  if (e.target.classList.contains('cancel-btn')) {
-    e.preventDefault()
+  if (elements.saveButton.classList.contains('save-edit-btn')) {
     elements.form.classList.add('hidden')
-    elements.saveButton.classList = ''
-    resetInputs()
-  }
+    elements.wrapper.classList.toggle('blur')
+    const list = state.getList(elements.form.id)
 
-  if (e.target.classList.contains('delete-list-btn') && document.querySelector('.open')) {
-    if (document.querySelectorAll('.list').length === 1) {
-      const error = document.createElement('p')
-      error.textContent = 'You cannot remove the last project'
-      elements.content.appendChild(error)
-      return
-    }
+    list.editTodo(
+      elements.form.id,
+      elements.titleInput.value,
+      elements.descriptionInput.value,
+      elements.dateInput.value,
+      elements.priorityInput.value
+    )
 
-    const target = document.querySelector('.open')
-    target.classList.remove('open')
-    state.deleteList(target.textContent)
-    displayLists()
-    document.querySelector('.list').classList.add('open')
-    showList(document.querySelector('.list').textContent)
-    console.log(state)
-  }
-})
+    elements.saveButton.classList.remove('save-edit-btn') 
+    elements.form.id = ''
 
-window.addEventListener('load', (e) => {
-  loadState()
-
-  if (state.lists.length === 0) {
-    state.addList('default')
-    document.querySelector('.list').classList.add('open')
-    showList('default')
-  }
-  displayLists()
+    showList(list.name)
+    resetInputs()  }
 })

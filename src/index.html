@@ -6,41 +6,46 @@
   <title>GetDone</title>
 </head>
 <body>
-  <div class="sidebar">
-    <div class="add">
-      <h1 class='logo'>GetDone</h1>
-      <input class='add-input' type="text" placeholder='Add a new list' minlength='3' maxlength='16'>
-      <button class='add-btn'>Add</button>
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="add-list">
+        <h1 class='logo'>GetDone</h1>
+        <div class='add'>
+          <input class='add-input' type="text" placeholder='Add a new list' minlength='3' maxlength='16'>
+          <button class='add-btn' type='button'>Add list</button>
+        </div>
+      </div>
+      <div class="lists"></div>
     </div>
-    <div class="lists"></div>
+    <div class="content">
+    </div>
   </div>
-  <div class="content">
-    
-  </div>
-
   <form class='hidden'>
     <div>
       <label for="title">Title</label>
-      <input type="text" id='title' name='title' minlength='3' maxlength='20'>
+      <input type="text" id='title' name='title' minlength='3' maxlength='20' required>
     </div>
     <div>
       <label for="description">Description</label>
-      <input type="text" id='description' name='title' minlength='3' maxlength='35'>
+      <textarea type="text" id='description' name='description' minlength='3' maxlength='35' required></textarea>
     </div>
     <div>
       <label for="date">Due Date</label>
-      <input type="date" id='date' name='title'>
+      <input type="date" id='date' name='date' required>
     </div>
     <div>
       <label for="priority">Priority</label>
-      <select name="priority" id="priority">
+      <select name="priority" id="priority" required>
+        <button>
+          <selectedcontent></selectedcontent>
+        </button>
         <option value="low">low</option>
         <option value="medium">medium</option>
         <option value="high">high</option>
       </select>
     </div>
-    <button id='save-btn'>save</button>
-    <button class='cancel-btn'>Cancel</button>
+    <button id='save-btn' type='submit'>Save</button>
+    <button class='cancel-btn' type='button'>Cancel</button>
   </form>
 </body>
 </html>

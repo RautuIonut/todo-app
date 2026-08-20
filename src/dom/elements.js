@@ -9,7 +9,8 @@ const elements = {
   dateInput: document.querySelector('#date'),
   priorityInput: document.querySelector('#priority'),
   cancelButton: document.querySelector('.cancel-btn'),
-  listsContainer: document.querySelector('.lists')
+  listsContainer: document.querySelector('.lists'),
+  wrapper: document.querySelector('.wrapper')
 }
 
 export default elements
